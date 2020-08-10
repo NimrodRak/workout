@@ -31,7 +31,7 @@ def workout():
         exercise_list = []
         for line in file:
             splitted = line.replace('\n', '').split(", ")
-            exercise_list.append({"name": splitted[0], "ex_time": int(splitted[1]) * 1000, "br_time": int(splitted[2]) * 1000})
+            exercise_list.append({"name": splitted[0].capitalize(), "ex_time": int(splitted[1]) * 1000, "br_time": int(splitted[2]) * 1000})
 
     return render_template("workout.html", exercises_list=dumps(exercise_list), name=name)
 

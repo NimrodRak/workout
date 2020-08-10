@@ -31,10 +31,10 @@
                 document.getElementById('baap').load();
                 document.getElementById('baap').play();
                 let prev_time = document.getElementById('exnum').innerHTML;
-                document.getElementById('exnum').innerHTML = i + 1 + prev_time.slice(1, prev_time.length);
-                prev_time = document.getElementById('exnum').innerHTML;
+                let new_time = i + 1 + prev_time.slice(1 + Math.floor(i / 10) , prev_time.length);
+                document.getElementById('exnum').innerHTML = new_time;
                 document.getElementById('extime').innerHTML = "";
-                document.getElementById('exname').innerHTML = prev_time + " | " + exercises[i]['name'];
+                document.getElementById('exname').innerHTML = new_time + " | " + exercises[i]['name'];
                 setTimeout(function() {displayExercise(i, j + 1);}, exercises[i]['ex_time'] - 5000);
             } else if (j < 5) {
                 document.getElementById('extime').innerHTML = 6 - j;
@@ -52,6 +52,7 @@
                 document.getElementById('exprog').value = (i + 1) * part;
                 setTimeout(function() {displayExercise(i + 1);}, exercises[i]['br_time']);
             } else {
+                document.getElementById('exprog').value = 100;
                 document.getElementById('exname').innerHTML = "You're Done! Good Job!";
                 document.getElementById('extime').innerHTML = "";
             }
