@@ -16,8 +16,8 @@ def index():
 
 @app.route('/workout')
 def workout():
-    workout = request.args.get("name")
 
+    workout = request.args.get("name")
 
     for file_name in os.listdir("static/workouts"):
         with open("./static/workouts/" + file_name) as file:

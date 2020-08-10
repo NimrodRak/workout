@@ -5,7 +5,8 @@
     <title>Workout App</title>
 </head>
 <body>
-    <p>Welcome to the workout app v2.0! this version, contrary to the previous, is not on Tkinter, which makes it not shite!</p>
+    <h3>Welcome to the workout app v2.0! this version, contrary to the previous, is not on Tkinter, which makes it not shite!</h3>
+    <label for="planselect">Please choose your desired workout: </label>
     <select id="planselect" name="planselect">
         {% for option in options %}
         <option value="{{option}}">{{option}}</option>
