@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workout App</title>
+</head>
+<body>
+    <p>Welcome to the workout app v2.0! this version, contrary to the previous, is not on Tkinter, which makes it not shite!</p>
+    <select id="planselect" name="planselect">
+        {% for option in options %}
+        <option value="{{option}}">{{option}}</option>
+        {% endfor %}
+    </select>
+    <button id="confirm" onclick="jumpToWorkout()">continue</button>
+</body>
+    <script>
+        function jumpToWorkout() {
+            location.href = '/workout?name=' + document.getElementById('planselect').value;
+        }
+    </script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}</title>
+</head>
+<body onload="initialize()">
+    <audio id="beep" style="width: 0px; height: 0px">
+        <source src="{{url_for('static', filename='beep.wav')}}" type="audio/mp3">
+    </audio>
+    <audio id="baap" style="width: 0px; height: 0px">
+        <source src="{{url_for('static', filename='baap.wav')}}" type="audio/mp3">
+    </audio>
+
+    <p id="exnum" hidden="1"></p>
+    <p align="center"><progress id="exprog" max="100" value="0" style="width: 75%; height: 3em"></progress></p>
+    <h1 style="font-size: 7em" align="center" id="exname"></h1>
+    <h3 id="extime" style="font-size: 3em" align="center"></h3>
+    <script>
+        var exercises; var part;
+        function initialize() {
+            exercises = JSON.parse({{exercises_list | tojson | safe}});
+            part = 100 / exercises.length;
+            document.getElementById('exnum').innerHTML = "0 of " + exercises.length;
+            document.getElementById('exname').innerHTML = "0 of " + exercises.length + " | Hasn't started yet"
+            displayExercise(0);
+        }
+
+        function displayExercise(i, j = 0) {
+            if (j === 0) {
+                document.getElementById('baap').load();
+                document.getElementById('baap').play();
+                let prev_time = document.getElementById('exnum').innerHTML;
+                document.getElementById('exnum').innerHTML = i + 1 + prev_time.slice(1, prev_time.length);
+                prev_time = document.getElementById('exnum').innerHTML;
+                document.getElementById('extime').innerHTML = "";
+                document.getElementById('exname').innerHTML = prev_time + " | " + exercises[i]['name'];
+                setTimeout(function() {displayExercise(i, j + 1);}, exercises[i]['ex_time'] - 5000);
+            } else if (j < 5) {
+                document.getElementById('extime').innerHTML = 6 - j;
+                document.getElementById('beep').load();
+                document.getElementById('beep').play();
+                setTimeout(function() {displayExercise(i, j + 1);}, 1000);
+            } else if (j === 5) {
+                document.getElementById('extime').innerHTML = 6 - j;
+                document.getElementById('beep').load();
+                document.getElementById('beep').play();
+                setTimeout(function() {document.getElementById('baap').load(); document.getElementById('baap').play(); displayExercise(i, j + 1);}, 1000);
+            } else if (i < exercises.length - 1) {
+                document.getElementById('exname').innerHTML = "Next Up: " + exercises[i + 1]['name'];
+                document.getElementById('extime').innerHTML = "";
+                document.getElementById('exprog').value = (i + 1) * part;
+                setTimeout(function() {displayExercise(i + 1);}, exercises[i]['br_time']);
+            } else {
+                document.getElementById('exname').innerHTML = "You're Done! Good Job!";
+                document.getElementById('extime').innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
