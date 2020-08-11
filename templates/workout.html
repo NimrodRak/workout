@@ -5,16 +5,12 @@
     <title>{{name}}</title>
 </head>
 <body>
-<audio id="beep" style="width: 0px; height: 0px">
-    <source src="{{url_for('static', filename='beep.wav')}}" type="audio/mp3">
-</audio>
-<audio id="baap" style="width: 0px; height: 0px">
-    <source src="{{url_for('static', filename='baap.wav')}}" type="audio/mp3">
-</audio>
+
 <p align="center">
     <progress id="exprog" max="100" value="0" style="width: 75%; height: 3em" hidden="1"></progress>
 </p>
-<h1 id="start" style="font-size: xx-large" align="center"><a href="#ongoing" onclick="initialize()">Press to start</a></h1>
+<h1 id="start" style="font-size: xx-large" align="center"><a href="#ongoing" onclick="initialize()">Press to start</a>
+</h1>
 <h1 id="exname" style="font-size: 7em" align="center" hidden="1"></h1>
 <h3 id="extime" style="font-size: 3em" align="center" hidden="1"></h3>
 
@@ -22,6 +18,9 @@
     var exercises;
     var part;
     var exnum;
+    var beep = new Audio("static/beep.wav");
+    var baap = new Audio("static/baap.wav");
+    var t = 4;
 
     function initialize() {
         document.getElementById('exname').hidden = false;
@@ -35,42 +34,35 @@
         displayExercise(0);
     }
 
-    function displayExercise(i, j = 0) {
-        if (j === 0) {
-            document.getElementById('baap').load();
-            document.getElementById('baap').play();
-            exnum = i + 1 + exnum.slice(1 + Math.floor(i / 10), exnum.length);
-            document.getElementById('extime').innerHTML = "";
-            document.getElementById('exname').innerHTML = exnum + " | " + exercises[i]['name'];
+    function displayExercise(i, j = true) {
+        if (j) { // if this is before the 5 - second count
+            baap.play();
+            exnum = i + 1 + exnum.slice(1 + Math.floor(i / 10), exnum.length); // increment the progress
+            document.getElementById('extime').innerHTML = ""; // reset the timer
+            document.getElementById('exname').innerHTML = exnum + " | " + exercises[i]['name']; // update the name
+            t = 4;
             setTimeout(() => {
-                displayExercise(i, j + 1);
+                displayExercise(i, false); // call the function again, but this time with the timer
             }, exercises[i]['ex_time'] - 5000);
-        } else if (j <= 5) {
-            document.getElementById('extime').innerHTML = 6 - j;
-            document.getElementById('beep').load();
-            document.getElementById('beep').play();
-            if (j === 5) {
-                setTimeout(() => {
-                    document.getElementById('baap').load();
-                    document.getElementById('baap').play();
-                    displayExercise(i, j + 1);
-                }, 1000);
-            } else {
-                setTimeout(() => {
-                    displayExercise(i, j + 1);
-                }, 1000);
-            }
-        } else {
-            document.getElementById('extime').innerHTML = "";
-            document.getElementById('exprog').value = (i + 1) * part;
-            if (i < exercises.length - 1) {
-                document.getElementById('exname').innerHTML = "Next Up: " + exercises[i + 1]['name'];
-                setTimeout(() => {
-                    displayExercise(i + 1);
-                }, exercises[i]['br_time']);
-            } else {
-                document.getElementById('exname').innerHTML = "You're Done! Good Job!";
-            }
+        } else { // we do need a timer
+            var id = setInterval(() => {
+                if (t !== 0) { // if we are in the middle of the timer
+                    document.getElementById('extime').innerHTML = t;
+                    beep.play();
+                    t--;
+                } else { // if the timer is over
+                    clearInterval(id); // stop the interval
+                    baap.play(); // play the break baap
+                    document.getElementById('extime').innerHTML = "Break";
+                    document.getElementById('exname').innerHTML = "Next Up: " + exercises[i + 1]['name'];
+                    document.getElementById('exprog').value = (i + 1) * part;
+                    if (i < exercises.length - 1) { // if this is not the last exercise
+                        setTimeout(() => { // continue to the next exercise after the break
+                            displayExercise(i + 1);
+                        }, exercises[i]['br_time']);
+                    }
+                }
+            }, 1000);
         }
     }
 </script>
