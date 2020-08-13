@@ -13,10 +13,6 @@
         {% endfor %}
     </select>
     <button id="confirm" onclick="jumpToWorkout()">continue</button>
+    <script type="text/javascript" src="../static/index.js"></script>
 </body>
-    <script>
-        function jumpToWorkout() {
-            location.href = '/workout?name=' + document.getElementById('planselect').value;
-        }
-    </script>
 </html>
