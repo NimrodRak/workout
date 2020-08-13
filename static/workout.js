@@ -1,8 +1,8 @@
 var exercises;
 var part;
 var exerciseNumber;
-var beep = new Audio("static/beep.wav");
-var baap = new Audio("static/baap.wav");
+var beep = new Audio("static/beep.wav"); // TODO: give better name
+var baap = new Audio("static/baap.wav"); // TODO: give better name
 var t = 4;
 
 function initialize(exercise_list) {
@@ -20,6 +20,7 @@ function initialize(exercise_list) {
 }
 
 function displayExercise(i, j = true) {
+    // TODO: Simplify function (make readable)
     if (j) { // if this is before the 5 - second count
         baap.play();
         exerciseNumber = i + 1 + exerciseNumber.slice(1 + Math.floor(i / 10), exerciseNumber.length); // increment the progress

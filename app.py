@@ -27,6 +27,7 @@ def workout():
         # TODO: parse as CSV
         for line in file:
             splitted = line.replace("\n", "").split(", ")
+            # TODO: make calculations more simple
             exercise_list.append({"name": splitted[0].capitalize(), "exercise_time": int(splitted[1]) * 1000, "break_time": int(splitted[2]) * 1000})
 
     return render_template("workout.html", exercises_list=dumps(exercise_list), name=workout)
