@@ -6,17 +6,13 @@
 </head>
 <body>
     <h3>Welcome to the workout app v2.0! this version, contrary to the previous, is not on Tkinter, which makes it not shite!</h3>
-    <label for="planselect">Please choose your desired workout: </label>
-    <select id="planselect" name="planselect">
+    <label for="select-plan">Please choose your desired workout: </label>
+    <select id="select-plan" name="select-plan">
         {% for option in options %}
         <option value="{{option}}">{{option}}</option>
         {% endfor %}
     </select>
     <button id="confirm" onclick="jumpToWorkout()">continue</button>
+    <script type="text/javascript" src="../static/index.js"></script>
 </body>
-    <script>
-        function jumpToWorkout() {
-            location.href = '/workout?name=' + document.getElementById('planselect').value;
-        }
-    </script>
 </html>
