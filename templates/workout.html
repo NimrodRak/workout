@@ -8,7 +8,9 @@
 <body>
     <div align="center">
         <progress id="progress-bar" max="100" value="0" hidden="1"></progress>
-        <a id="start" href="#ongoing" onclick="initialize({{exercises_list}})">Press to start</a>
+        <div id=start>
+            <a href="#ongoing" onclick="initialize({{exercises_list}})">Press to start</a>
+        </div>
         <h1 id="exname" hidden="1"></h1>
         <h3 id="extime" hidden="1"></h3>
     </div>

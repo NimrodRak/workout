@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     workouts_list = []
     for file_name in os.listdir("static/workouts"):
-        workouts_list.append(file_name)
+        workouts_list.append(file_name.strip('.csv'))
     return render_template("index.html", options=workouts_list)
 
 
@@ -22,8 +22,9 @@ def workout():
         # TODO: Handle error
         pass
 
-    with open(f'static/workouts/{workout}') as file:
+    with open(f'static/workouts/{workout}.csv') as file:
         exercise_list = []
+        # TODO: parse as CSV
         for line in file:
             splitted = line.replace('\n', '').split(", ")
             exercise_list.append({"name": splitted[0].capitalize(), "ex_time": int(splitted[1]) * 1000, "br_time": int(splitted[2]) * 1000})
