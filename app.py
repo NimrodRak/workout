@@ -15,19 +15,19 @@ def index():
 
 @app.route("/workout")
 def workout():
-    workout = request.args.get("workout_name")
+    workout = request.args.get("name")
     # TODO: Check input to avoid security bugs
 
     if not os.path.isfile(f"static/workouts/{workout}.csv"):
         # TODO: Handle error
         pass
 
-    with open("static/workouts/{workout}.csv") as file:
+    with open(f"static/workouts/{workout}.csv") as file:
         exercise_list = []
         # TODO: parse as CSV
         for line in file:
             splitted = line.replace("\n", "").split(", ")
-            exercise_list.append({"name": splitted[0].capitalize(), "ex_time": int(splitted[1]) * 1000, "br_time": int(splitted[2]) * 1000})
+            exercise_list.append({"name": splitted[0].capitalize(), "exercise_time": int(splitted[1]) * 1000, "break_time": int(splitted[2]) * 1000})
 
     return render_template("workout.html", exercises_list=dumps(exercise_list), name=workout)
 
