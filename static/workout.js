@@ -46,6 +46,10 @@ function displayExercise(i, j = true) {
                     setTimeout(() => { // continue to the next exercise after the break
                         displayExercise(i + 1);
                     }, exercises[i]['break_time']);
+                } else {
+                    document.getElementById('exercise-name').innerHTML = "You're Done! Good Job!";
+                    document.getElementById('exercise-time').innerHTML = "If you want to return to the main menu, click me"
+                    document.getElementById('exercise-time').onclick('location.href = /index')
                 }
             }
         }, 1000);
