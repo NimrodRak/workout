@@ -1,12 +1,21 @@
 # Workout
-Workout is an app for doing HIIT and similar workouts.
+Workout is an app that simplifies working out with an elegant interface for a workout clock-guide.
+
+### requirements
+For the workout web app to work, the ```flask``` python module must be installed.
 
 ### Usage
-Download the app repo and run it on your computer.  
+After the repo has been installed run it on your computer using the command
 ```
 python app.py
 ```
-In the index page, choose a workout, and begin!
+on Windows or
+```
+python3 app.py
+```
+on Linux.
+
+In the index page, choose a workout, press __Start Workout__ and begin!
 
 ### Features
 - Create custom workouts
@@ -14,10 +23,7 @@ In the index page, choose a workout, and begin!
 - Timer counts down each exercise and each break
 
 ### Issues
-- Need to fix .gitignore
-- Need to add reqirements
 - Need to improve README
-    + Improve Usage
     + Add more documentation
     + Add license?
     + Add color or images?
