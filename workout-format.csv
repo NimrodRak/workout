@@ -1,0 +1,4 @@
+The format of each workout in the .csv workout file is the following:
+<workout name>, <workout duration>, <break duration> (e.g. squats, 45, 15 will be 45 seconds of squats with a 15 seconds of break after it.)
+
+Note: The last workout also needs to have a break after it, even though it has no meaning during the workout.
