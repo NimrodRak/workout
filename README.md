@@ -1,21 +1,18 @@
 # Workout
 Workout is an app that simplifies working out with an elegant interface for a workout clock-guide.
 
-### requirements
+### Requirements
 For the workout web app to work, the ```flask``` python module must be installed.
 
 ### Usage
-After the repo has been installed run it on your computer using the command
+- Clone the repo to your computer
+- Run the app server using python:
 ```
 python app.py
 ```
-on Windows or
-```
-python3 app.py
-```
-on Linux.
-
-In the index page, choose a workout, press __Start Workout__ and begin!
+- Open your favourite browser and go to [http://localhost:8080]
+- In the main page, choose a workout and press **Continue**
+- Finally, press **Press to start** to begin your workout!
 
 ### Features
 - Create custom workouts
@@ -26,5 +23,11 @@ In the index page, choose a workout, press __Start Workout__ and begin!
 - Need to improve README
     + Add more documentation
     + Add license?
-    + Add color or images?
+    + Add images
         * Add image to usage
+- Improve UI
+    + Index page
+        * More colorful
+        * More centered
+    + Start page
+        * More interesting/colorful
